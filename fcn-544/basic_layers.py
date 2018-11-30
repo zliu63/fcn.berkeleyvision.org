@@ -4,7 +4,7 @@ from caffe import params
 
 
 def conv(prev, nout, ks=3, stride=1, pad=1):
-	ret = layers.Convolution(prev, kernal_size = ks, stride = stride,
+	ret = layers.Convolution(prev, kernel_size = ks, stride = stride,
 								num_output=nout, pad = pad,
 								param = [dict(lr_mult=1, decay_mult=1), dict(lr_mult=2, decay_mult=0)])
 	return ret
