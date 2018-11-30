@@ -10,16 +10,16 @@ def fcn(mode):
 	data_params = dict(mode = mode, mean=(104.00699, 116.66877, 122.67892),
 						seed = 1337)
 	if mode == 'train':
-		data_params['train_dir']='..'  ##TODO
+		data_params['data_dir']='..'  ##TODO
 		data_layer = 'TrainingDataLayer'
 	elif mode == 'test':
-		data_params['test_dir']='..' ##TODO
+		data_params['data_dir']='..' ##TODO
 		data_layer = 'TestingDataLayer' 
 	else:
-		data_params['valid_dir']='..'
+		data_params['data_dir']='..'
 		data_layer = 'ValidatingDataLayer'
 	
-	net.data, net.label = layers.Python(module='fcn_layers', layer = data_layer, ntop=2, param_str = str(data_params))
+	net.data, net.label = layers.Python(module='data_layers', layer = data_layer, ntop=2, param_str = str(data_params))
 
 	# layer1 , conv+relu -> conv+relu -> max_pooling
 	net.conv1_1 = conv(net.data, 64, pad=100)
@@ -97,11 +97,11 @@ def build():
 	with open('train.prototxt', 'w') as f:
 		f.write(str(fcn('train')))
 
-	with open('test.prototxt', 'w') as f:
-		f.write(str(fcn('test')))
+	#with open('test.prototxt', 'w') as f:
+		#f.write(str(fcn('test')))
 
-	with open('val.prototxt', 'w') as f:
-		f.write(str(fcn('val')))
+	#with open('val.prototxt', 'w') as f:
+		#f.write(str(fcn('val')))
 
 if __name__ == '__main__':
 	build()
