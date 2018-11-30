@@ -12,7 +12,7 @@ def fcn(mode):
 	if mode == 'train':
 		data_params['train_dir']='..'  ##TODO
 		data_layer = 'TrainingDataLayer'
-	else if mode == 'test':
+	elif mode == 'test':
 		data_params['test_dir']='..' ##TODO
 		data_layer = 'TestingDataLayer' 
 	else:
