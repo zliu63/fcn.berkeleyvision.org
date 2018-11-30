@@ -1,6 +1,6 @@
 import caffe
-from caffe import layers
-from caffe import params
+from caffe import L
+from caffe import P
 from caffe.coord_map import crop
 from basic_layers import conv, relu, max_pooling, dropout, deconv, sumup, softmax
 
