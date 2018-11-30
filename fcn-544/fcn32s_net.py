@@ -10,7 +10,7 @@ def fcn(mode):
 	data_params = dict(mode = mode, mean=(104.00699, 116.66877, 122.67892),
 						seed = 1337)
 	if mode == 'train':
-		data_params['data_dir']='..'  ##TODO
+		data_params['data_dir']='/jet/prs/workspace/VOCdevkit/VOC2012'  ##TODO
 		data_layer = 'TrainingDataLayer'
 	elif mode == 'test':
 		data_params['data_dir']='..' ##TODO
