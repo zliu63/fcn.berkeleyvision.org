@@ -52,7 +52,7 @@ def fcn(mode):
 	# layer5, conv+relu -> conv+relu -> max_pooling
 	net.conv5_1 = conv(net.pool4, 512)
 	net.relu5_1 = relu(net.conv5_1)
-	net.conv5_2 = conv(net.relu5_1, 521)
+	net.conv5_2 = conv(net.relu5_1, 512)
 	net.relu5_2 = relu(net.conv5_2)
 	net.pool5 = max_pooling(net.relu5_2)
 
