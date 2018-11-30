@@ -29,7 +29,7 @@ def fcn(mode):
         data_params['data_dir']='..'
         data_layer = 'ValidatingDataLayer'
     
-    n.data, n.label = layers.Python(module='data_layer', layer = data_layer, ntop=2, param_str = str(data_params))
+    n.data, n.label = L.Python(module='data_layer', layer = data_layer, ntop=2, param_str = str(data_params))
 
 
 
