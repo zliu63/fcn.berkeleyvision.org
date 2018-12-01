@@ -21,7 +21,7 @@ def fcn(mode):
         data_params['data_dir']='..'
         data_layer = 'ValidatingDataLayer'
     
-    net.data, net.label = L.Python(module='data_layer', layer = data_layer, 
+    net.data, net.label = layers.Python(module='data_layer', layer = data_layer, 
                     ntop=2, param_str = str(data_params))
 
     # layer1 , conv+relu -> conv+relu -> max_pooling
