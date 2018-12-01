@@ -10,7 +10,7 @@ def conv(bottom, nout, ks=3, stride=1, pad=1):
 
 
 def relu(bottom):
-	return layers.ReLu(bottom, in_place=True)
+	return layers.ReLU(bottom, in_place=True)
 
 def max_pooling(bottom, ks=2, stride=2):
 	return layers.Pooling(bottom, pool=params.Pooling.MAX, kernel_size=ks, stride=stride)
