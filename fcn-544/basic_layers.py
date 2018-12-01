@@ -28,5 +28,5 @@ def sumup(layer1, layer2):
 	return layers.Eltwise(layer1, layer2, operation=params.Eltwise.SUM)
 
 def softmax(layer1, layer2):
-	return = layers.SoftmaxWithLoss(layer1, layer2,
+	return layers.SoftmaxWithLoss(layer1, layer2,
 				loss_param=dict(normalize=False, ignore_label=255))
