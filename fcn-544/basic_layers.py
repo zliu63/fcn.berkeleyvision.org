@@ -9,7 +9,7 @@ def conv(prev, nout, ks=3, stride=1, pad=1):
 								param = [dict(lr_mult=1, decay_mult=1), dict(lr_mult=2, decay_mult=0)])
 	return ret
 
-def relu(prev, ks=3, stride = 1):
+def relu(prev):
 	ret = layers.ReLu(prev, in_place=True)
 	return ret
 
@@ -18,7 +18,7 @@ def max_pooling(prev, ks=2, stride=2):
 	return ret
 
 def dropout(prev, ratio = 0.5, in_place = True):
-	return layers.Dropout(prev, dropout_ratio=ratio, in_place = True)
+	return layers.Dropout(prev, dropout_ratio=ratio, in_place = in_place)
 
 def deconv(prev, nout, ks=4, stride=2, bias_term=False):
 	ret = layers.Deconvolution(prev,
