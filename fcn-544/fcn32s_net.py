@@ -77,7 +77,8 @@ def fcn(mode):
     net.drop7 = dropout(net.relu7_1)
 
     # layer8, forward score
-    net.score1_1 = conv(net.drop7, 21, ks=1, pad=0)
+    net.score1_1 = layers.Convolution(net.drop7, num_output=21, kernel_size=1, pad=0,
+                    param = [dict(lr_mult=1,decay_mult=1), dict(lr_mult=2, decay_mult=0)])   #conv(net.drop7, 21, ks=1, pad=0)
     net.upscore1_1 = deconv(net.score1_1, 21, ks=64, stride = 32)
 
     net.score = crop(net.upscore1_1, net.data)
