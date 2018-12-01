@@ -79,7 +79,8 @@ def fcn(mode):
     # layer8, forward score
     net.score1_1 = layers.Convolution(net.drop7, num_output=21, kernel_size=1, pad=0,
                     param = [dict(lr_mult=1,decay_mult=1), dict(lr_mult=2, decay_mult=0)])   #conv(net.drop7, 21, ks=1, pad=0)
-    net.upscore1_1 = deconv(net.score1_1, 21, ks=64, stride = 32)
+    net.upscore1_1 = layers.Deconvolution(net.score1_1, convolution_param=dict(num_output=21,
+                    kernel_size=64, stride=32, bias_term=False), param=[dict(lr_mult=0)])  #deconv(net.score1_1, 21, ks=64, stride = 32)
 
     net.score = crop(net.upscore1_1, net.data)
     net.loss = softmax(net.score, net.label)
