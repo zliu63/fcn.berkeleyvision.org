@@ -22,7 +22,7 @@ def interpolation(net, layers):
 			print('filters need to be square')
 			raise
 		filter = upsample(h)
-		net.params[l][0].data[range(m), range(k), :, :] = filter
+		net.params[l][0].data[range(in_s), range(out_s), :, :] = filter
 
 # try:
 #     import setproctitle
