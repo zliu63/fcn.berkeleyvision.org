@@ -16,10 +16,10 @@ def interpolation(net, layers):
 	for l in layers:
 		in_s, out_s, h, w = net.params[l][0].data.shape
 		if in_s != out_s and out_s != 1:
-			print 'input + output channels need to be the same or |output| == 1'
+			print('input + output channels need to be the same or |output| == 1')
 			raise
 		if h != w:
-			print 'filters need to be square'
+			print('filters need to be square')
 			raise
 		filter = upsample(h)
 		net.params[l][0].data[range(m), range(k), :, :] = filter
