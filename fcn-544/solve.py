@@ -39,7 +39,7 @@ solver.net.copy_from(weights)
 
 # setup bilinear kernels
 interpolation_layers = [k for k in solver.net.params.keys() if 'up' in k]
-interpolation(solver.net, interp_layers)
+interpolation(solver.net, interpolation_layers)
 
 # scoring
 val = np.loadtxt('val.txt', dtype=str)

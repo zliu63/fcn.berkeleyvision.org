@@ -14,12 +14,9 @@ def fcn(mode):
     if mode == 'train':
         data_params['data_dir']='/jet/prs/workspace/VOCdevkit/VOC2012'  ##TODO
         data_layer = 'TrainingDataLayer'
-    # elif mode == 'test':
-    #     data_params['data_dir']='..' ##TODO
-    #     data_layer = 'TestingDataLayer' 
-    # else:
-    #     data_params['data_dir']='..'
-    #     data_layer = 'ValidatingDataLayer'
+    elif mode == 'val':
+        data_params['data_dir']='/jet/prs/workspace/VOCdevkit/VOC2012' ##TODO
+        data_layer = 'ValidDataLayer' 
     
     net.data, net.label = layers.Python(module='data_layer', layer = data_layer, 
                     ntop=2, param_str = str(data_params))
@@ -106,11 +103,8 @@ def build():
     with open('train.prototxt', 'w') as f:
         f.write(str(fcn('train')))
 
-    #with open('test.prototxt', 'w') as f:
-        #f.write(str(fcn('test')))
-
-    #with open('val.prototxt', 'w') as f:
-        #f.write(str(fcn('val')))
+    with open('val.prototxt', 'w') as f:
+        f.write(str(fcn('val')))
 
 if __name__ == '__main__':
     build()
