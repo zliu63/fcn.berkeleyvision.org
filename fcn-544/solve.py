@@ -46,7 +46,7 @@ val = np.loadtxt('val.txt', dtype=str)
 
 for _ in range(25):
 	solver.step(4000)
-	score.seg_tests(solver, True, val, layer='score')
+	score.seg_tests(solver, False, val, layer='score')
 
 
 
