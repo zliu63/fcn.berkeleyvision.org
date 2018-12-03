@@ -8,7 +8,7 @@ import score
 def upsample(s):
 	up_f = (s + 1) // 2
 	center = up_f - 1 if s % 2 else up_f - 0.5
-	x, y = np.ogrid[:size, :size]
+	x, y = np.ogrid[:s, :s]
 	return (1 - abs(x - center) / up_f) * (1 - abs(y - center) / up_f)
 
 # Set weights for bilinear kernel
