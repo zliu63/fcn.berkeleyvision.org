@@ -25,6 +25,6 @@ out = net.blobs['score'].data[0].argmax(axis=0)
 # visualize segmentation in PASCAL VOC colors
 voc_palette = vis.make_palette(21)
 out_im = Image.fromarray(vis.color_seg(out, voc_palette))
-out_im.save('demo/output.png')
+out_im.save('demo/test_output.png')
 masked_im = Image.fromarray(vis.vis_seg(im, out, voc_palette))
-masked_im.save('demo/visualization.jpg')
+masked_im.save('demo/test_visualization.jpg')
