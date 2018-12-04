@@ -44,8 +44,8 @@ interpolation(solver.net, interpolation_layers)
 # scoring
 val = np.loadtxt('val.txt', dtype=str)
 
-for _ in range(25):
-	solver.step(4000)
+for _ in range(5):
+	solver.step(20000)
 	score.seg_tests(solver, False, val, layer='score')
 
 
