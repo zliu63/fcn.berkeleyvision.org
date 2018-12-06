@@ -403,10 +403,10 @@ layer {
   }
 }
 layer {
-  name: "conv6_1"
+  name: "fc6"
   type: "Convolution"
   bottom: "pool5"
-  top: "conv6_1"
+  top: "fc6"
   param {
     lr_mult: 1.0
     decay_mult: 1.0
@@ -423,25 +423,25 @@ layer {
   }
 }
 layer {
-  name: "relu6_1"
+  name: "relu6"
   type: "ReLU"
-  bottom: "conv6_1"
-  top: "conv6_1"
+  bottom: "fc6"
+  top: "fc6"
 }
 layer {
   name: "drop6"
   type: "Dropout"
-  bottom: "conv6_1"
-  top: "conv6_1"
+  bottom: "fc6"
+  top: "fc6"
   dropout_param {
     dropout_ratio: 0.5
   }
 }
 layer {
-  name: "conv7_1"
+  name: "fc7"
   type: "Convolution"
-  bottom: "conv6_1"
-  top: "conv7_1"
+  bottom: "fc6"
+  top: "fc7"
   param {
     lr_mult: 1.0
     decay_mult: 1.0
@@ -458,25 +458,25 @@ layer {
   }
 }
 layer {
-  name: "relu7_1"
+  name: "relu7"
   type: "ReLU"
-  bottom: "conv7_1"
-  top: "conv7_1"
+  bottom: "fc7"
+  top: "fc7"
 }
 layer {
   name: "drop7"
   type: "Dropout"
-  bottom: "conv7_1"
-  top: "conv7_1"
+  bottom: "fc7"
+  top: "fc7"
   dropout_param {
     dropout_ratio: 0.5
   }
 }
 layer {
-  name: "score1_1"
+  name: "score_fr"
   type: "Convolution"
-  bottom: "conv7_1"
-  top: "score1_1"
+  bottom: "fc7"
+  top: "score_fr"
   param {
     lr_mult: 1.0
     decay_mult: 1.0
@@ -493,10 +493,10 @@ layer {
   }
 }
 layer {
-  name: "upscore1_1"
+  name: "upscore"
   type: "Deconvolution"
-  bottom: "score1_1"
-  top: "upscore1_1"
+  bottom: "score_fr"
+  top: "upscore"
   param {
     lr_mult: 0.0
   }
@@ -510,7 +510,7 @@ layer {
 layer {
   name: "score"
   type: "Crop"
-  bottom: "upscore1_1"
+  bottom: "upscore"
   bottom: "data"
   top: "score"
   crop_param {

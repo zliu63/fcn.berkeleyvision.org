@@ -64,20 +64,20 @@ def fcn(mode):
 
 
     # layer6, conv + relu -> dropout
-    net.conv6_1 = conv(net.pool5, 4096, ks=7, pad=0)
-    net.relu6_1 = relu(net.conv6_1)
-    net.drop6 = dropout(net.relu6_1)
+    net.fc6 = conv(net.pool5, 4096, ks=7, pad=0)
+    net.relu6 = relu(net.fc6)
+    net.drop6 = dropout(net.relu6)
 
     # layer7, conv + relu -> dropout
-    net.conv7_1 = conv(net.drop6, 4096, ks=1, pad=0)
-    net.relu7_1 = relu(net.conv7_1)
-    net.drop7 = dropout(net.relu7_1)
+    net.fc7 = conv(net.drop6, 4096, ks=1, pad=0)
+    net.relu7 = relu(net.fc7)
+    net.drop7 = dropout(net.relu7)
 
     # layer8, forward score
-    net.score1_1 = conv(net.drop7, 21, ks=1, pad=0)
-    net.upscore1_1 = deconv(net.score1_1, 21, ks=64, stride = 32)
+    net.score_fr = conv(net.drop7, 21, ks=1, pad=0)
+    net.upscore = deconv(net.score_fr, 21, ks=64, stride = 32)
 
-    net.score = crop(net.upscore1_1, net.data)
+    net.score = crop(net.upscore, net.data)
     net.loss = softmax(net.score, net.label)
 
 
