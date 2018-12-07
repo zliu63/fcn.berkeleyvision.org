@@ -79,7 +79,7 @@ def fcn(mode):
 
     # layer9, 
     net.score_pool4 = conv(net.pool4, 21, ks=1, pad=0)
-    net.score_pool4_crop = crop(net.scroe_pool4, net.upscore1)
+    net.score_pool4_crop = crop(net.score_pool4, net.upscore1)
     net.integrate_pool4 = sumup(net.upscore1, net.score_pool4_crop)
     net.upscore2 = deconv(net.integrate_pool4, 21, ks=32, stride = 16)
     

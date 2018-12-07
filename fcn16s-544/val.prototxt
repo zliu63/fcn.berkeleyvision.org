@@ -493,29 +493,85 @@ layer {
   }
 }
 layer {
-  name: "upscore"
+  name: "upscore1"
   type: "Deconvolution"
   bottom: "score_fr"
-  top: "upscore"
+  top: "upscore1"
   param {
     lr_mult: 0.0
   }
   convolution_param {
     num_output: 21
     bias_term: false
-    kernel_size: 64
-    stride: 32
+    kernel_size: 4
+    stride: 2
+  }
+}
+layer {
+  name: "score_pool4"
+  type: "Convolution"
+  bottom: "pool4"
+  top: "score_pool4"
+  param {
+    lr_mult: 1.0
+    decay_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+    decay_mult: 0.0
+  }
+  convolution_param {
+    num_output: 21
+    pad: 0
+    kernel_size: 1
+    stride: 1
+  }
+}
+layer {
+  name: "score_pool4_crop"
+  type: "Crop"
+  bottom: "score_pool4"
+  bottom: "upscore1"
+  top: "score_pool4_crop"
+  crop_param {
+    axis: 2
+    offset: 5
+  }
+}
+layer {
+  name: "integrate_pool4"
+  type: "Eltwise"
+  bottom: "upscore1"
+  bottom: "score_pool4_crop"
+  top: "integrate_pool4"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "upscore2"
+  type: "Deconvolution"
+  bottom: "integrate_pool4"
+  top: "upscore2"
+  param {
+    lr_mult: 0.0
+  }
+  convolution_param {
+    num_output: 21
+    bias_term: false
+    kernel_size: 32
+    stride: 16
   }
 }
 layer {
   name: "score"
   type: "Crop"
-  bottom: "upscore"
+  bottom: "upscore2"
   bottom: "data"
   top: "score"
   crop_param {
     axis: 2
-    offset: 19
+    offset: 27
   }
 }
 layer {
