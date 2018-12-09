@@ -14,6 +14,7 @@ def atrous(prev, nout, dialation,ks=3, stride=1, pad=1):
                             param=[dict(lr_mult=1, decay_mult=1),dict(lr_mult=2, decay_mult=0)])
 
 
+
 def relu(prev):
 	return layers.ReLU(prev, in_place=True)
 
