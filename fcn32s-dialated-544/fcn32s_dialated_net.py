@@ -54,7 +54,7 @@ def fcn(mode):
     # net.pool4 = max_pooling(net.relu4_3) discard
 
     # layer5, conv+relu -> conv+relu -> max_pooling
-    net.conv5_1 = atrous(net.conv4_3, 512, 2)
+    net.conv5_1 = atrous(net.relu4_3, 512, 2)
     net.relu5_1 = relu(net.conv5_1)
     net.conv5_2 = atrous(net.relu5_1, 512, 2)
     net.relu5_2 = relu(net.conv5_2)
@@ -64,7 +64,7 @@ def fcn(mode):
 
 
     # layer6, conv + relu -> dropout
-    net.fc6 = atrous(net.conv5_3, 4096, 4, ks=7, pad=0)
+    net.fc6 = atrous(net.relu5_3, 4096, 4, ks=7)
     net.relu6 = relu(net.fc6)
     net.drop6 = dropout(net.relu6)
 
@@ -75,8 +75,8 @@ def fcn(mode):
 
     # layer8, forward score, frontend vgg
     net.score_fr = conv(net.drop7, 21, ks=1, pad=0)
-
-    net.upscore = deconv(net.score_fr, 21, ks=64, stride = 32)
+    
+    net.upscore = deconv(net.score_fr, 21, ks=16, stride = 8, pad = 0)
 
     net.score = crop(net.upscore, net.data)
     net.loss = softmax(net.score, net.label)
